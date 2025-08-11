@@ -63,6 +63,7 @@ public class Monster_Movement : MonoBehaviour
         return direction;
     }
 
+
     void Rotate(Vector3 direction, bool Lerp = true)
     {
         if (direction != Vector3.zero)
