@@ -18,7 +18,7 @@ public class Player_Movement : MonoBehaviour
         controller = GetComponent<CharacterController>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Move();
         Rotate();
