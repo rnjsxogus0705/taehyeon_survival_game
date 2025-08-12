@@ -5,15 +5,14 @@ public class Player_Movement : MonoBehaviour
 {
     public float moveSpeed = 5.0f;
     public Vector3 cameraDir = Vector3.zero;
-
-    private Camera m_camera;
+    
+    private Camera m_Camera;
     private Vector3 moveDir;
     private CharacterController controller;
     private Animator animator;
-
     private void Start()
     {
-        m_camera = Camera.main;
+        m_Camera = Camera.main;
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
     }
@@ -33,6 +32,7 @@ public class Player_Movement : MonoBehaviour
 
         moveDir = new Vector3(h, 0, v).normalized;
         controller.SimpleMove(moveDir * moveSpeed);
+
     }
 
     void Rotate()
@@ -42,32 +42,30 @@ public class Player_Movement : MonoBehaviour
             Vector3 dirToMonster = Player.instance.Direction();
             dirToMonster.y = 0f;
             
-            RotateTiQuaternion(dirToMonster);
+            RotateToQuaternion(dirToMonster);
         }
-        else if (moveDir.sqrMagnitude > 0.01f)
+        
+        else if(moveDir.sqrMagnitude > 0.01f)
         {
-            RotateTiQuaternion(moveDir);
+            RotateToQuaternion(moveDir);
         }
     }
 
-    void RotateTiQuaternion(Vector3 direction)
+    void RotateToQuaternion(Vector3 direction)
     {
         Quaternion targetRot = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, 10f * Time.deltaTime);
     }
-
     
-
     void Animate()
     {
         animator.SetFloat("SPEED", moveDir.magnitude);
     }
-
     void CameraMove()
     {
-        m_camera.transform.position = Vector3.Lerp(
-            m_camera.transform.position,
-            transform.position + cameraDir, 
+        m_Camera.transform.position = Vector3.Lerp(
+            m_Camera.transform.position,
+            transform.position + cameraDir,
             2.0f * Time.deltaTime);
     }
 }

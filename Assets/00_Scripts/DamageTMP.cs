@@ -25,8 +25,8 @@ public class DamageTMP : MonoBehaviour
         
         m_Text.text = temp;
 
-        Vector2 screenPosition = Camera.main.WorldToScreenPoint(pos);
-        rectTransform.position = screenPosition;
+        Vector2 screemPosition = Camera.main.WorldToScreenPoint(pos);
+        rectTransform.position = screemPosition;
         
         velocity = new Vector2(Random.Range(-50.0f, 50.0f), Random.Range(150.0f, 250.0f));
         
@@ -49,9 +49,8 @@ public class DamageTMP : MonoBehaviour
             
             elapsedTime += Time.deltaTime;
             yield return null;
-
         }
         
-        Destroy(this.gameObject);
+        MANAGER.POOL.m_pool_Dictionary["DamageTMP"].Return(this.gameObject);
     }
 }

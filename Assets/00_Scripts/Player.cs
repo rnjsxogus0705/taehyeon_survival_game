@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player instance = null;
-    
+
     private void Awake()
     {
         if (instance == null)
@@ -15,12 +15,12 @@ public class Player : MonoBehaviour
     
     public float detectionRadius;
     public LayerMask monsterLayer;
-    
+
     public Transform target
     {
         get { return GetNearestMonster(); }
     }
-    
+
     public Vector3 Direction()
     {
         Vector3 dirToMonster = (target.position - transform.position).normalized;
